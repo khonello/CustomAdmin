@@ -1,4 +1,4 @@
-# CustomAdmin
+# Custom Django Administration
 
 ### Production Environment Setup
 - Open `WSL`
