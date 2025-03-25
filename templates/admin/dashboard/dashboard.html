@@ -1,0 +1,366 @@
+{% extends 'base.html' %}
+{% load static  %}
+
+{% block head %}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords"
+        content="wrappixel, admin dashboard, html css dashboard, web dashboard, bootstrap 5 admin, bootstrap 5, css3 dashboard, bootstrap 5 dashboard, Ample lite admin bootstrap 5 dashboard, frontend, responsive bootstrap 5 admin template, Ample admin lite dashboard bootstrap 5 dashboard template">
+    <meta name="description"
+        content="Ample Admin Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
+    <meta name="robots" content="noindex,nofollow">
+    <title>{{ page_title }}</title>
+    <link rel="canonical" href="https://www.wrappixel.com/templates/ample-admin-lite/" />
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon.png' %}">
+    <!-- Custom CSS -->
+    <link href="{% static 'plugins/bower_components/chartist/dist/chartist.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css' %}">
+    <!-- Custom CSS -->
+    <link href="{% static 'css/style.min.css' %}" rel="stylesheet">
+</head>
+{% endblock head %}
+
+{% block fluid %}
+<div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Three charts -->
+    <!-- ============================================================== -->
+    <div class="row justify-content-center">
+        <div class="col-lg-4 col-md-12">
+            <div class="white-box analytics-info">
+                <h3 class="box-title">Total Visit</h3>
+                <ul class="list-inline two-part d-flex align-items-center mb-0">
+                    <li>
+                        <div id="sparklinedash"><canvas width="67" height="30"
+                                style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
+                        </div>
+                    </li>
+                    <li class="ms-auto"><span class="counter text-success">659</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-12">
+            <div class="white-box analytics-info">
+                <h3 class="box-title">Total Page Views</h3>
+                <ul class="list-inline two-part d-flex align-items-center mb-0">
+                    <li>
+                        <div id="sparklinedash2"><canvas width="67" height="30"
+                                style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
+                        </div>
+                    </li>
+                    <li class="ms-auto"><span class="counter text-purple">869</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-12">
+            <div class="white-box analytics-info">
+                <h3 class="box-title">Unique Visitor</h3>
+                <ul class="list-inline two-part d-flex align-items-center mb-0">
+                    <li>
+                        <div id="sparklinedash3"><canvas width="67" height="30"
+                                style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
+                        </div>
+                    </li>
+                    <li class="ms-auto"><span class="counter text-info">911</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- PRODUCTS YEARLY SALES -->
+    <!-- ============================================================== -->
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+            <div class="white-box">
+                <h3 class="box-title">Products Yearly Sales</h3>
+                <div class="d-md-flex">
+                    <ul class="list-inline d-flex ms-auto">
+                        <li class="ps-3">
+                            <h5><i class="fa fa-circle me-1 text-info"></i>Mac</h5>
+                        </li>
+                        <li class="ps-3">
+                            <h5><i class="fa fa-circle me-1 text-inverse"></i>Windows</h5>
+                        </li>
+                    </ul>
+                </div>
+                <div id="ct-visits" style="height: 405px;">
+                    <div class="chartist-tooltip" style="top: -17px; left: -12px;"><span
+                            class="chartist-tooltip-value">6</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- RECENT SALES -->
+    <!-- ============================================================== -->
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-sm-12">
+            <div class="white-box">
+                <div class="d-md-flex mb-3">
+                    <h3 class="box-title mb-0">Recent sales</h3>
+                    <div class="col-md-3 col-sm-4 col-xs-6 ms-auto">
+                        <select class="form-select shadow-none row border-top">
+                            <option>March 2021</option>
+                            <option>April 2021</option>
+                            <option>May 2021</option>
+                            <option>June 2021</option>
+                            <option>July 2021</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover no-wrap">
+                        <thead>
+                            <tr>
+                                <th class="border-top-0">#</th>
+                                <th class="border-top-0">Product</th>
+                                <th class="border-top-0">Category</th>
+                                <th class="border-top-0">Delivered</th>
+                                <th class="border-top-0">Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for sale in sales %}
+                                <tr onclick="window.location= '#'">
+                                    <td>{{ forloop.counter }}</td>
+                                    <td class="txt-oflo">{{ sale.product.name }}</td>
+                                    <td>{{ sale.product.category.name }}</td>
+                                    <td>{{ sale.delivered }}</td>
+                                    <td>GH¢ {{ sale.product.price }}</td>
+                                </tr>
+                            {% empty %}
+
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-sm-12">
+            <div class="white-box">
+                <div class="d-md-flex mb-3">
+                    <h3 class="box-title mb-0">Products Category</h3>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover no-wrap">
+                        <thead>
+                            <tr>
+                                <th class="border-top-0">#</th>
+                                <th class="border-top-0">Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for category in categories %}
+                                <tr onclick="window.location= '#'">
+                                    <td>{{ forloop.counter }}</td>
+                                    <td class="txt-oflo">{{ category.name }}</td>
+                                </tr>
+                            {% empty %}
+
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card white-box p-0">
+                <div class="row">
+                    <div class="col p-0">
+                        <div class="card-body mt-3">
+                            <a href="#" class="btn bg-primary text-white">Add Products</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Recent Comments -->
+    <!-- ============================================================== -->
+    <div class="row">
+        <!-- .col -->
+        <div class="col-md-12 col-lg-8 col-sm-12">
+            <div class="card white-box p-0">
+                <div class="card-body">
+                    <h3 class="box-title mb-0">Recent Comments</h3>
+                </div>
+                <div class="comment-widgets">
+                    <!-- Comment Row -->
+                    {% for comment in comments %}
+
+                        <div class="d-flex flex-row comment-row p-3 mt-0" onclick="window.location= '#'">
+                            <div class="p-2"><img src="{{ comment.user.profile_image.url }}" alt="user" width="50" class="rounded-circle"></div>
+                            <div class="comment-text ps-2 ps-md-3 w-100">
+                                <h5 class="font-medium">{{ comment.user.first_name| title }} {{ comment.user.last_name| title }}</h5>
+                                <span class="mb-3 d-block">{{ comment.message }}</span>
+                                <div class="comment-footer d-md-flex align-items-center">
+                                        {% if comment.status == "approved" %}
+                                            <span class="badge bg-success rounded">{{ comment.status }}</span>
+                                        {% elif comment.status == "pending" %}
+                                            <span class="badge bg-warning rounded">{{ comment.status }}</span>
+                                        {% elif comment.status == "rejected" %}
+                                            <span class="badge bg-danger rounded">{{ comment.status }}</span>
+                                        {% endif %}
+                                    <div class="text-muted fs-2 ms-auto mt-2 mt-md-0">{{ comment.date_modified }}</div>
+                                </div>
+                            </div> 
+                        </div>
+
+                    {% empty %}
+                    
+                    {% endfor %}
+                </div>
+
+            </div>
+            <div class="card white-box p-0">
+                <div class="row">
+                    <div class="col p-0">
+                        <div class="card-body mt-3">
+                            <a href="#" class="btn bg-primary text-white">
+                                Add Comment
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-12 col-sm-12">
+            <div class="card white-box p-0">
+                <div class="card-heading">
+                    <h3 class="box-title mb-0">Chat Listing</h3>
+                </div>
+                <div class="card-body">
+                    <ul class="chatonline">
+                        <li>
+                        {% for staff in staffs %}
+                            <div class="call-chat">
+                                {% if user.is_superuser %}
+                                    <button class="btn btn-success text-white btn-circle btn" type="button">
+                                        <a href="#">
+                                            <i class="fas fa-phone text-white"></i>
+                                        </a>
+                                    </button>
+                                    <button class="btn btn-info btn-circle btn" type="button">
+                                        <a href="#">
+                                            <i class="far fa-comments text-white"></i>
+                                        </a>
+                                    </button>
+                                {% endif %}
+
+                            </div>
+                            <a href="#" class="d-flex align-items-center mb-2">
+                                <img src="{{ staff.profile_image.url }}" alt="user-img" class="img-circle">
+                                    <div class="ms-2">
+                                        {% if staff.is_active %}
+                                            <span class="text-dark">
+                                                {{ staff.first_name| title }} {{ staff.last_name| title }}
+                                                <small class="d-block text-success d-block">Online</small>
+                                            </span>
+                                        {% else %}
+                                            <span class="text-dark">
+                                                {{ staff.first_name| title }} {{ staff.last_name| title }}
+                                                <small class="d-block text-success d-block">Offline</small>
+                                            </span>
+                                        {% endif %}
+                                    </div>
+                            </a>
+                        {% empty %}
+                        
+                        {% endfor %}
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- /.col -->
+    </div>
+</div>
+{% endblock fluid %}
+
+{% block script %}
+<script>
+    $(function () {
+        "use strict";
+        // ============================================================== 
+        // Newsletter
+        // ============================================================== 
+
+        //ct-visits
+        new Chartist.Line('#ct-visits', {
+            labels: ['2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015'],
+            series: [
+                [5, 2, 7, 4, 5, 3, 5, 4],
+                [2, 5, 2, 6, 2, 5, 2, 4]
+            ]
+        }, {
+            top: 0,
+            low: 1,
+            showPoint: true,
+            fullWidth: true,
+            plugins: [
+                Chartist.plugins.tooltip()
+            ],
+            axisY: {
+                labelInterpolationFnc: function (value) {
+                    return (value / 1) + 'k';
+                }
+            },
+            showArea: true
+        });
+
+
+        var chart = [chart];
+
+        var sparklineLogin = function () {
+            $('#sparklinedash').sparkline([0, 5, 6, 10, 9, 12, 4, 9], {
+                type: 'bar',
+                height: '30',
+                barWidth: '4',
+                resize: true,
+                barSpacing: '5',
+                barColor: '#7ace4c'
+            });
+            $('#sparklinedash2').sparkline([0, 5, 6, 10, 9, 12, 4, 9], {
+                type: 'bar',
+                height: '30',
+                barWidth: '4',
+                resize: true,
+                barSpacing: '5',
+                barColor: '#7460ee'
+            });
+            $('#sparklinedash3').sparkline([0, 5, 6, 10, 9, 12, 4, 9], {
+                type: 'bar',
+                height: '30',
+                barWidth: '4',
+                resize: true,
+                barSpacing: '5',
+                barColor: '#11a0f8'
+            });
+            $('#sparklinedash4').sparkline([0, 5, 6, 10, 9, 12, 4, 9], {
+                type: 'bar',
+                height: '30',
+                barWidth: '4',
+                resize: true,
+                barSpacing: '5',
+                barColor: '#f33155'
+            });
+        }
+        var sparkResize;
+        $(window).on("resize", function (e) {
+            clearTimeout(sparkResize);
+            sparkResize = setTimeout(sparklineLogin, 500);
+        });
+        sparklineLogin();
+    });
+
+</script>
+{% endblock script %}

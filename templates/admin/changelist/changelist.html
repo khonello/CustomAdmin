@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block head %}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords"
+        content="wrappixel, admin dashboard, html css dashboard, web dashboard, bootstrap 5 admin, bootstrap 5, css3 dashboard, bootstrap 5 dashboard, Ample lite admin bootstrap 5 dashboard, frontend, responsive bootstrap 5 admin template, Ample admin lite dashboard bootstrap 5 dashboard template">
+    <meta name="description"
+        content="Ample Admin Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
+    <meta name="robots" content="noindex,nofollow">
+    <title>Ample Admin Lite Template by WrapPixel</title>
+    <link rel="canonical" href="https://www.wrappixel.com/templates/ample-admin-lite/" />
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon.png' %}">
+    <!-- Custom CSS -->
+   <link href="{% static 'css/style.min.css' %}" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+{% endblock head %}
+
+{% block fluid %}
+<div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="white-box">
+                    <h3 class="box-title">{{ module_name| title }}</h3>
+
+                    <div class="table-responsive">
+                        <table class="table table-hover text-nowrap">
+                            <thead>
+                                <tr>
+                                    <th class="border-top-0">#</th>
+                                    <th class="border-top-0">User Name</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                {% for object in objects %}
+                                    {% with "admin:"|add:opts.app_label|add:"_"|add:opts.model_name|add:"_"|add:"change" as urlname %}
+                                        <tr onclick="window.location= '{% url urlname object_id=object.id %}'">
+
+                                            <td>{{ forloop.counter }}</td>
+                                            <td>{{ object| title }}</td>
+
+                                        </tr>
+                                    {% endwith %}
+                                {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="pagination">
+            <span class="step-links">
+                {% if objects.has_previous %}
+                    <a href="?page=1">&laquo; first</a>
+                    <a href="?page={{ objects.previous_page_number }}">previous</a>
+                {% endif %}
+
+                <span class="current">
+                    Page {{ objects.number }} of {{ objects.paginator.num_pages }}.
+                </span>
+
+                {% if objects.has_next %}
+                    <a href="?page={{ objects.next_page_number }}">next</a>
+                    <a href="?page={{ objects.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+
+
+    <!-- ============================================================== -->
+    <!-- End PAge Content -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Right sidebar -->
+    <!-- ============================================================== -->
+    <!-- .right-sidebar -->
+    <!-- ============================================================== -->
+    <!-- End Right sidebar -->
+    <!-- ============================================================== -->
+</div>
+{% endblock fluid %}
+

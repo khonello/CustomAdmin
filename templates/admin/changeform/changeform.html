@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load i18n %}
+{% block head %}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords"
+        content="wrappixel, admin dashboard, html css dashboard, web dashboard, bootstrap 5 admin, bootstrap 5, css3 dashboard, bootstrap 5 dashboard, Ample lite admin bootstrap 5 dashboard, frontend, responsive bootstrap 5 admin template, Ample admin lite dashboard bootstrap 5 dashboard template">
+    <meta name="description"
+        content="Ample Admin Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
+    <meta name="robots" content="noindex,nofollow">
+    <title>Ample Admin Lite Template by WrapPixel</title>
+    <link rel="canonical" href="https://www.wrappixel.com/templates/ample-admin-lite/" />
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon.png' %}">
+    <!-- Custom CSS -->
+   <link href="{% static 'css/style.min.css' %}" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+{% endblock head %}
+
+{% block fluid %}
+<div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+
+
+        <div class="row">
+            <div class="col-sm-12">
+                    
+                    {% if errors %}
+                        <p class="errornote">
+                            {% if errors|length == 1 %}
+                                {% translate "Please correct the error below." %}
+                            {% else %}
+                                {% translate "Please correct the errors below." %}
+                            {% endif %}
+                        </p>
+                    {% endif %}
+                    {% if adminform.form.non_field_errors %}
+                        {% for error in adminform.form.non_field_errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    {% endif %}
+
+                <form method="post" enctype="multipart/form-data" id="{{ opts.model_name }}_form" class="form-horizontal form-material">    
+                    {% csrf_token %}
+                    {% for fieldset in adminform %}
+
+                            <div class="white-box">
+                                
+                                {% if fieldset.name %}
+                                    <h4 class="bolder">{{ fieldset.name }}</h4>
+                                {% else %}
+                                    <h4 class="bolder">Details</h4>
+                                {% endif %}
+
+                                {% comment %} <h3>{{ app_label }}</h3>
+                                <h3 class="box-title">{{ opts.model_name| title }}</h3> {% endcomment %}
+
+                                    {% for category in fieldset %}
+                                        <div class="form-group mb-4">
+                                            {% for field in category %}
+
+                                                <div class="{% for class in fieldset.classes %}{{ class }}{% endfor %}">
+                                                    
+                                                    {{ field.label_tag }}
+                                                    {{ field.field }}<br>
+
+                                                </div>
+
+                                            {% endfor %}
+                                        </div>
+                                    {% endfor %}
+                            </div>
+                    {% endfor %}
+                    <div class="white-box">
+                            <input type="submit" value="{% trans "Save" %}" class="btn btn-primary me-2">
+
+                            {% if has_delete_permission %}
+                                {% with "admin:"|add:opts.app_label|add:"_"|add:opts.model_name|add:"_"|add:"delete" as urlname %}
+                                    <a href="{% url urlname object_id=original.pk %}" class="text-danger">Delete</a>
+                                {% endwith %}
+                            {% endif %}
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+
+    <!-- ============================================================== -->
+    <!-- End PAge Content -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Right sidebar -->
+    <!-- ============================================================== -->
+    <!-- .right-sidebar -->
+    <!-- ============================================================== -->
+    <!-- End Right sidebar -->
+    <!-- ============================================================== -->
+</div>
+{% endblock fluid %}
+
+
